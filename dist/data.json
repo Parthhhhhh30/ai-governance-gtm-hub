@@ -1,0 +1,203 @@
+{
+  "generated": "2026-10-23",
+  "fictional": true,
+  "frameworks": {
+    "eu_ai_act": {
+      "label": "EU AI Act",
+      "type": "Legislation",
+      "question": "How do you inventory AI use cases, identify relevant actor roles, and determine which controls may apply?",
+      "value": "AI inventory, intake, assessment, and audit evidence",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "caution": "Do not assume the company is subject to a specific obligation; applicability depends on facts and current dates."
+    },
+    "iso42001": {
+      "label": "ISO/IEC 42001",
+      "type": "Management-system standard",
+      "question": "How does your team assign ownership, document AI policies, evaluate systems, and improve governance processes?",
+      "value": "documented review workflows, ownership, and governance evidence",
+      "url": "https://www.iso.org/standard/42001",
+      "caution": "A management-system standard is not itself an EU legal mandate; do not imply certification."
+    },
+    "nist": {
+      "label": "NIST AI RMF",
+      "type": "Voluntary risk framework",
+      "question": "How do you operationalize Govern, Map, Measure, and Manage across AI systems?",
+      "value": "centralized risk records, ownership, and control reviews",
+      "url": "https://airc.nist.gov/airmf-resources/airmf/",
+      "caution": "NIST AI RMF is voluntary; do not present it as a legal requirement."
+    }
+  },
+  "signalTypes": {
+    "ai_rollout": [
+      "New AI rollout",
+      24,
+      "eu_ai_act"
+    ],
+    "governance_hire": [
+      "AI governance leadership hire",
+      27,
+      "iso42001"
+    ],
+    "regulatory_review": [
+      "AI regulatory programme",
+      23,
+      "eu_ai_act"
+    ],
+    "iso_initiative": [
+      "AI management-system initiative",
+      19,
+      "iso42001"
+    ],
+    "risk_framework": [
+      "AI risk programme",
+      19,
+      "nist"
+    ],
+    "third_party_ai": [
+      "Third-party AI adoption",
+      15,
+      "nist"
+    ],
+    "other": [
+      "Other sourced signal",
+      7,
+      "nist"
+    ]
+  },
+  "accounts": [
+    {
+      "id": 2,
+      "name": "Aster Retail Holdings",
+      "industry": "Retail",
+      "region": "United States",
+      "summary": "FICTIONAL DEMO ACCOUNT — not a real prospect",
+      "score": 24,
+      "reasons": [
+        "New AI rollout (+24)"
+      ],
+      "signals": [
+        {
+          "id": 3,
+          "kind": "ai_rollout",
+          "summary": "Aster plans to expand AI-enabled operational workflows.",
+          "url": "https://example.com/demo/aster-retail-holdings/0",
+          "observed": "2026-10-13",
+          "reviewed": true
+        },
+        {
+          "id": 4,
+          "kind": "third_party_ai",
+          "summary": "Aster has discussed wider use of third-party AI tools.",
+          "url": "https://example.com/demo/aster-retail-holdings/1",
+          "observed": "2026-10-01",
+          "reviewed": false
+        }
+      ],
+      "contacts": [
+        {
+          "id": 2,
+          "first": "Jordan",
+          "last": "Lee",
+          "role": "VP Enterprise Risk",
+          "stage": "New",
+          "verified": false,
+          "approved": false,
+          "suppressed": false,
+          "held": false,
+          "firstDate": "",
+          "secondDate": ""
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Meridian Health Systems",
+      "industry": "Healthcare",
+      "region": "EU",
+      "summary": "FICTIONAL DEMO ACCOUNT — not a real prospect",
+      "score": 38,
+      "reasons": [
+        "AI management-system initiative (+19)",
+        "AI risk programme (+19)"
+      ],
+      "signals": [
+        {
+          "id": 5,
+          "kind": "iso_initiative",
+          "summary": "Meridian has started an internal AI management-system initiative.",
+          "url": "https://example.com/demo/meridian-health-systems/0",
+          "observed": "2026-10-13",
+          "reviewed": true
+        },
+        {
+          "id": 6,
+          "kind": "risk_framework",
+          "summary": "Meridian is exploring a structured AI risk framework.",
+          "url": "https://example.com/demo/meridian-health-systems/1",
+          "observed": "2026-10-01",
+          "reviewed": true
+        }
+      ],
+      "contacts": [
+        {
+          "id": 3,
+          "first": "Sam",
+          "last": "Taylor",
+          "role": "Director, Responsible AI",
+          "stage": "New",
+          "verified": false,
+          "approved": false,
+          "suppressed": false,
+          "held": false,
+          "firstDate": "",
+          "secondDate": ""
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Northstar Financial Group",
+      "industry": "Financial services",
+      "region": "UK / EU",
+      "summary": "FICTIONAL DEMO ACCOUNT — not a real prospect",
+      "score": 50,
+      "reasons": [
+        "AI governance leadership hire (+27)",
+        "AI regulatory programme (+23)"
+      ],
+      "signals": [
+        {
+          "id": 1,
+          "kind": "governance_hire",
+          "summary": "Northstar has appointed a leader for its AI governance programme.",
+          "url": "https://example.com/demo/northstar-financial-group/0",
+          "observed": "2026-10-13",
+          "reviewed": true
+        },
+        {
+          "id": 2,
+          "kind": "regulatory_review",
+          "summary": "Northstar has announced an internal AI compliance review.",
+          "url": "https://example.com/demo/northstar-financial-group/1",
+          "observed": "2026-10-01",
+          "reviewed": true
+        }
+      ],
+      "contacts": [
+        {
+          "id": 1,
+          "first": "Alex",
+          "last": "Morgan",
+          "role": "Head of AI Governance",
+          "stage": "New",
+          "verified": false,
+          "approved": false,
+          "suppressed": false,
+          "held": false,
+          "firstDate": "",
+          "secondDate": ""
+        }
+      ]
+    }
+  ]
+}

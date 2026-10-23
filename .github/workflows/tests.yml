@@ -1,0 +1,44 @@
+name: Validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Python business rules and local HTTP controls
+        run: python -m unittest discover -s tests -v
+      - name: Public demo JS rules
+        run: node --test tests/demo.test.cjs
+      - name: Validate syntax
+        run: |
+          python -m compileall -q app.py core.py build_demo.py
+          node --check demo/app.js
+      - name: Build visitor demo
+        run: python build_demo.py
+      - name: Security and fixture audit
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          dist=Path('dist')
+          assert {p.name for p in dist.iterdir()}=={'index.html','style.css','app.js','data.json','health.json'}
+          data=json.loads((dist/'data.json').read_text())
+          assert data['fictional'] is True and len(data['accounts'])==3
+          assert all('email' not in c and 'linkedin_url' not in c for a in data['accounts'] for c in a['contacts'])
+          assert not list(dist.rglob('*.db')) and not list(dist.rglob('.env*'))
+          assert 'NOT AFFILIATED WITH ENZAI' in (dist/'index.html').read_text()
+          assert all(s['url'].startswith('https://example.com/') for a in data['accounts'] for s in a['signals'])
+          assert json.loads((dist/'health.json').read_text())['status']=='ok'
+          PY
