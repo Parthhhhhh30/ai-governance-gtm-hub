@@ -1,0 +1,14 @@
+const test=require('node:test');const assert=require('node:assert/strict');
+const {priority,isQualified,validateMeeting,draftFor,gateStatus,html,safeUrl}=require('../demo/app.js');
+const types={hire:['AI hire',27,'iso']};const frameworks={iso:{label:'ISO/IEC 42001',type:'Standard',question:'ownership is documented',caution:'Not law'}};
+const sig=(reviewed)=>({id:1,kind:'hire',summary:'Example appointed a governance lead.',url:'https://example.com/fictional',observed:'2026-10-01',reviewed});
+test('unreviewed signals score zero',()=>{assert.equal(priority([sig(false)],types,'2026-10-23').score,0)});
+test('reviewed signal contributes deterministic weight',()=>{assert.equal(priority([sig(true)],types,'2026-10-23').score,27)});
+test('repeat signal categories contribute once',()=>{assert.equal(priority([sig(true),{...sig(true),id:2}],types,'2026-10-23').score,27)});
+test('draft blocked without reviewed source',()=>{assert.equal(draftFor({name:'Demo',signals:[sig(false)]},{first:'Alex'},types,frameworks).body,'')});
+test('draft cites only reviewed fictional evidence',()=>{const d=draftFor({name:'Demo',signals:[sig(true)]},{first:'Alex'},types,frameworks);assert.match(d.body,/appointed a governance lead/);assert.equal(d.source,'https://example.com/fictional');});
+test('date qualification checks date order, held flag and future',()=>{assert.equal(isQualified({held:true,firstDate:'2026-10-01',secondDate:'2026-10-08'},'2026-10-23'),true);assert.equal(isQualified({held:false,firstDate:'2026-10-01',secondDate:'2026-10-08'},'2026-10-23'),false);assert.equal(isQualified({held:true,firstDate:'2026-11-01',secondDate:'2026-11-08'},'2026-10-23'),false);});
+test('meeting validator rejects meeting in future and backwards followup',()=>{assert.match(validateMeeting({held:true,firstDate:'2026-11-01',secondDate:''},'2026-10-23'),/future/);assert.match(validateMeeting({held:true,firstDate:'2026-10-08',secondDate:'2026-10-01'},'2026-10-23'),/after/);});
+test('public gate permanently excludes fictional recipient',()=>{assert.equal(gateStatus({verified:true,approved:true,suppressed:false},true).eligible,false)});
+test('HTML escaping neutralizes script markup',()=>{assert.equal(html('<script>"'), '&lt;script&gt;&quot;')});
+test('unsafe link schemes rejected',()=>{assert.equal(safeUrl('javascript:alert(1)'),'#')});

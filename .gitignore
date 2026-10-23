@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+*.db
+*.sqlite
+*.sqlite3
+data/*
+!data/.gitkeep
+.DS_Store
+# Local browser review evidence (not part of the deployed bundle)
+/dashboard-desktop.png
+/dashboard-mobile.png
+/account-dossier.png
+/outreach-studio.png
+/data-desktop.png
+/data-mobile.png
